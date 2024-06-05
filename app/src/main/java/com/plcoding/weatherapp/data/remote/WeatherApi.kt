@@ -1,0 +1,17 @@
+package com.plcoding.weatherapp.data.remote
+
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+// link API: https://open-meteo.com/
+interface WeatherApi {
+
+    // Function to call to API to get weather data
+    // the data specify in the @GET
+    // that we only take the hourly data of temperature_2m, weathercode, relativehumidity_2m, windspeed_10m, and pressure_msl
+    @GET("v1/forecast?hourly=temperature_2m,weathercode,relativehumidity_2m,windspeed_10m,pressure_msl")
+    suspend fun getWeatherData(
+        @Query("latitude") lat: Double,
+        @Query("longitude") long: Double
+    ): WeatherDto
+}
